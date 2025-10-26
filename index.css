@@ -1,0 +1,309 @@
+:root {
+  --bg-main: #0a0c12;
+  --bg-container: rgba(15, 18, 31, 0.8);
+  --accent-cyan: #00ffff;
+  --border-color: rgba(0, 255, 255, 0.5);
+  --text-color: #e0e0e0;
+  --text-secondary: #a0a0c0;
+  --font-mono: 'Roboto Mono', monospace;
+  --disabled-color: #555;
+}
+
+body {
+  background-color: var(--bg-main);
+  font-family: var(--font-mono);
+  color: var(--text-color);
+  overflow: hidden; /* Hide scrollbars from scanline overflow */
+}
+
+/* Animated Scanline Overlay */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0.5) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
+  z-index: 100;
+  animation: scanlines 20s linear infinite;
+}
+
+@keyframes scanlines {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 0 100vh;
+  }
+}
+
+/* Main App Container */
+.bg-\[\#2a2b2e\] {
+  background-color: var(--bg-container);
+  border: 2px solid var(--border-color);
+  box-shadow:
+    0 0 25px rgba(0, 255, 255, 0.4),
+    inset 0 0 15px rgba(0, 255, 255, 0.2);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border-radius: 4px;
+}
+
+/* Typography */
+h1.text-white {
+  color: var(--text-color);
+  text-shadow:
+    0 0 5px var(--accent-cyan),
+    0 0 10px var(--accent-cyan);
+  letter-spacing: 1px;
+}
+
+p.text-gray-400 {
+  color: var(--text-secondary);
+}
+
+#status {
+  color: var(--accent-cyan);
+  text-shadow: 0 0 4px var(--accent-cyan);
+  font-weight: bold;
+}
+
+#status .text-red-400 {
+  color: #ff4d4d;
+  text-shadow: 0 0 5px #ff4d4d;
+}
+
+/* Form Elements */
+#prompt-input {
+  background-color: rgba(10, 12, 18, 0.8);
+  border: 1px solid var(--border-color);
+  box-shadow: inset 0 0 8px rgba(0, 255, 255, 0.3);
+  font-family: var(--font-mono);
+  color: var(--text-color);
+  caret-color: var(--accent-cyan);
+  border-radius: 2px;
+}
+
+#prompt-input::placeholder {
+  color: var(--text-secondary);
+}
+
+#prompt-input:focus {
+  outline: none;
+  box-shadow:
+    0 0 10px var(--accent-cyan),
+    inset 0 0 8px rgba(0, 255, 255, 0.3);
+  border-color: var(--accent-cyan);
+}
+
+/* File Input */
+label[for='file-input'] {
+  background-color: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  border-radius: 2px;
+  transition: all 0.2s ease;
+}
+
+label[for='file-input']:hover {
+  background-color: rgba(0, 255, 255, 0.1);
+  color: var(--accent-cyan);
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+}
+
+#file-name {
+  color: var(--text-secondary);
+}
+
+#img-preview {
+  border: 1px solid var(--border-color);
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+}
+
+/* Generate Button */
+#generate-button {
+  background-color: rgba(0, 255, 255, 0.1);
+  border: 2px solid var(--accent-cyan);
+  color: var(--accent-cyan);
+  font-family: var(--font-mono);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-radius: 2px;
+  padding-top: 0.85rem;
+  padding-bottom: 0.85rem;
+  box-shadow:
+    0 0 5px var(--accent-cyan),
+    inset 0 0 5px rgba(0, 255, 255, 0.5);
+  transition: all 0.2s ease-out;
+}
+
+#generate-button:hover:not(:disabled) {
+  background-color: rgba(0, 255, 255, 0.3);
+  box-shadow:
+    0 0 20px var(--accent-cyan),
+    inset 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+#generate-button:disabled {
+  border-color: var(--disabled-color);
+  color: var(--disabled-color);
+  background-color: transparent;
+  box-shadow: none;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Video Player */
+#video {
+  border: 2px solid var(--border-color);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+  border-radius: 2px;
+}
+
+/* --- Banner --- */
+.app-banner {
+  background-color: rgba(10, 12, 18, 0.7);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-top: 1px solid var(--border-color);
+  font-family: var(--font-mono);
+}
+
+.app-banner-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 0.8fr auto 1.2fr;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 1rem;
+}
+
+.banner-left {
+  color: var(--text-secondary);
+  white-space: nowrap;
+  justify-self: start;
+}
+
+.banner-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 2.5rem;
+  justify-self: end;
+}
+
+.remix-ideas {
+  color: var(--text-secondary);
+}
+
+.remix-text {
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.banner-button {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 0.5rem 1rem;
+  border-radius: 2px;
+  transition: all 0.2s;
+  white-space: nowrap;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.close-button:hover {
+  background-color: rgba(0, 255, 255, 0.1);
+  color: var(--accent-cyan);
+}
+
+.button-ai-studio {
+  color: var(--bg-main);
+  background-color: var(--accent-cyan);
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.7);
+}
+
+.button-ai-studio:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 1);
+}
+
+.button-gemini-chat {
+  color: var(--text-secondary);
+  background-color: transparent;
+  border: 1px solid var(--text-secondary);
+}
+
+.button-gemini-chat:hover {
+  transform: scale(1.05);
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-color);
+  border-color: var(--text-color);
+}
+
+@media (max-width: 1024px) {
+  .app-banner-content {
+    grid-template-columns: 1fr 1fr;
+  }
+  .remix-ideas {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .banner-left {
+    display: none;
+  }
+  .app-banner-content {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+  .banner-right {
+    justify-content: center;
+    justify-self: center;
+  }
+}
+
+@media (max-width: 500px) {
+  .banner-buttons {
+    gap: 0.75rem;
+  }
+  .banner-button {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+  }
+}
+
+/* --- Unused classes from original file for reference ---
+:root {
+  --font-body: 'Inter', sans-serif;
+  --font-special: 'Permanent Marker', cursive;
+  --yellow-primary: #facc15;
+  --yellow-secondary: #fde047;
+  --text-neutral-200: #e5e7eb;
+  --text-neutral-400: #9ca3af;
+  --text-neutral-500: #6b7280;
+  --text-neutral-700: #374151;
+}
+*/
